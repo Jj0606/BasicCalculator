@@ -1,11 +1,59 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <limits>
 #include <ios>
 
+using namespace std;
+
+// Function to pre validate inputs
+double getValidNumber(bool integerOnly = false, bool allowNegative = true, bool disallowZero = false) {
+    string input;
+    double number;
+    
+    while (true) 
+    {
+        cout << "Enter a " << (integerOnly ? "whole number (integer)" : "number");
+
+        if (!allowNegative) 
+            cout << " (non-negative)";
+
+        cout << ": ";
+        
+        getline(std::cin, input);
+        stringstream ss(input);
+
+        // Check for numbers
+        if (!(ss >> number) || !(ss.eof())) {
+            cout << "Invalid input. Please enter a valid number.\n";
+            continue;
+        }
+
+        // Check for negative numbers
+        if (!allowNegative && number < 0) {
+            cout << "Error: Negative numbers are not allowed.\n";
+            continue;
+        }
+
+        // Check for zeros
+        if (disallowZero && number == 0) {
+            std::cout << "Error: Zero is not allowed for this operation.\n";
+            continue;
+        }
+
+        // Check for integers
+        if (integerOnly && number != static_cast<int>(number)) {
+            cout << "Error: You entered a decimal. Please enter a whole number.\n";
+            continue;
+        }
+
+        return number; // Valid number
+    }
+}
+
 bool addition(double a, double b)
 {
-    std::cout << std::endl << a << " + " << b << " = " << (a + b) << std::endl << std::endl;
+    cout << std::endl << a << " + " << b << " = " << (a + b) << std::endl << std::endl;
     return 1;
 }
 
@@ -23,75 +71,11 @@ bool multiplication(double a, double b)
 
 bool division(double a, double b)
 {
-    if (b == 0) {
-        std::cout << "Invalid input. Enter a non-zero rational number for b: ";
-
-        // Loop until valid input is received and b is non-zero
-        while (true) {
-            std::cin >> b;
-
-            if (std::cin.fail() || b == 0) 
-            {
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input. Enter a non-zero rational number for b: ";
-            } 
-            else 
-            {
-                break; // Valid non-zero input, exit loop
-            }
-        }
-    }
-    std::cout << std::endl << a << " / " << b << " = " << (a / b) << std::endl << std::endl;
     return 1;
 }
 
 bool modulo(int a, int b)
 {
-    if (a == 0) {
-        std::cout << "Invalid input. Enter an integer for a: ";
-
-        // Loop until valid input is received and b is non-zero
-        while (true) {
-            std::cin >> a;
-
-            if (std::cin.fail()) 
-            {
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input. Enter an integer for a: ";
-            }
-            else 
-            {
-                break; // Valid non-zero input, exit loop
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-    }
-    if (b == 0) {
-        std::cout << "Invalid input. Enter a non-zero integer for b: ";
-
-        // Loop until valid input is received and b is non-zero
-        while (true) {
-            std::cin >> b;
-
-            if (std::cin.fail() || b == 0) 
-            {
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input. Enter a non-zero integer for b: ";
-            }
-            else 
-            {
-                break; // Valid non-zero input, exit loop
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-        }
-    }
-    
-    std::cout << std::endl << a << " % " << b << " = " << (a % b) << std::endl << std::endl;
     return 1;
 }
 
