@@ -30,11 +30,14 @@ bool division(double a, double b)
         while (true) {
             std::cin >> b;
 
-            if (std::cin.fail() || b == 0) {
-                std::cin.clear();  // Clear the fail state
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            if (std::cin.fail() || b == 0) 
+            {
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Invalid input. Enter a non-zero rational number for b: ";
-            } else {
+            } 
+            else 
+            {
                 break; // Valid non-zero input, exit loop
             }
         }
@@ -43,16 +46,66 @@ bool division(double a, double b)
     return 1;
 }
 
+bool modulo(int a, int b)
+{
+    if (a == 0) {
+        std::cout << "Invalid input. Enter an integer for a: ";
+
+        // Loop until valid input is received and b is non-zero
+        while (true) {
+            std::cin >> a;
+
+            if (std::cin.fail()) 
+            {
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Enter an integer for a: ";
+            }
+            else 
+            {
+                break; // Valid non-zero input, exit loop
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+    }
+    if (b == 0) {
+        std::cout << "Invalid input. Enter a non-zero integer for b: ";
+
+        // Loop until valid input is received and b is non-zero
+        while (true) {
+            std::cin >> b;
+
+            if (std::cin.fail() || b == 0) 
+            {
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Enter a non-zero integer for b: ";
+            }
+            else 
+            {
+                break; // Valid non-zero input, exit loop
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        }
+    }
+    
+    std::cout << std::endl << a << " % " << b << " = " << (a % b) << std::endl << std::endl;
+    return 1;
+}
+
 int main() {
     int select;
     double a,b;
+    int d,e;
     std::string c;
 
     while(true)
     {
         std::cout << "Operation List:" << std::endl;
         std::cout << "1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division" << std::endl;
-        std::cout << "5 -  \t6 -  \t7 -  \t8 - " << std::endl << std::endl;
+        std::cout << "5 - Modulo \t6 -  \t7 -  \t8 - " << std::endl << std::endl;
         std::cout << "Enter operation: \t" ;
 
         while (!(std::cin >> select) || select < 1 || select > 9) // Check if input fails
@@ -77,20 +130,56 @@ int main() {
             case 4:
             std::cout << "Division operation selected: a / b" << std::endl;
             break;
+            case 5:
+            std::cout << "Modulo operation selected: a % b" << std::endl;
+            break;
         }
 
-        std::cout << "Enter a: \t";
-        while (!(std::cin >> a)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Enter a rational number for a: ";
+        if(select > 0 && select < 5)
+        {
+            std::cout << "Enter a: \t";
+            while (!(std::cin >> a)) 
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Enter a number for a: ";
+            }
+    
+            std::cout << "Enter b: \t";
+            while (!(std::cin >> b)) 
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Enter a number for b: ";
+            }
         }
-
-        std::cout << "Enter b: \t";
-        while (!(std::cin >> b)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Enter a rational number for b: ";
+        else if(select == 5)
+        {
+            while (true) 
+            {
+                std::cout << "Enter an integer for a: \t";
+                std::cin >> d;
+                if (std::cin.fail()) 
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input. Enter an integer for a: ";
+                }
+                break;
+            }
+    
+            while (true) 
+            {
+                std::cout << "Enter an integer for b: \t";
+                std::cin >> e;
+                if (std::cin.fail()) 
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input. Enter an integer for b: ";
+                }
+                break;
+            }
         }
 
         switch(select)
@@ -106,6 +195,9 @@ int main() {
             break;
             case 4:
             division(a,b);
+            break;
+            case 5:
+            modulo(d,e);
             break;
         }
 
