@@ -1,47 +1,135 @@
 #include <iostream>
 #include <string>
+#include <limits>
+#include <ios>
 
-float addition(float a, float b)
+bool addition()
 {
-    return a + b;
+    double a,b;
+    std::cout << "Addition operation selected: a + b" << std::endl;
+    std::cout << "Enter a: \t";
+    while (!(std::cin >> a)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for a: ";
+    }
+    std::cout << "Enter b: \t";
+    while (!(std::cin >> b)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for b: ";
+    }
+    std::cout << std::endl << a << " + " << b << " = " << (a + b) << std::endl << std::endl;
+    return 1;
 }
 
-float subtraction(float a, float b)
+bool subtraction()
 {
-    return a - b;
+    double a,b;
+    std::cout << "Addition operation selected: a - b" << std::endl;
+    std::cout << "Enter a: \t";
+    while (!(std::cin >> a)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for a: ";
+    }
+    std::cout << "Enter b: \t";
+    while (!(std::cin >> b)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for b: ";
+    }
+    std::cout << std::endl << a << " - " << b << " = " << (a - b) << std::endl << std::endl;
+    return 1;
 }
 
-float multiplication(float a, float b)
+bool multiplication()
 {
-    return a * b;
+    double a,b;
+    std::cout << "Addition operation selected: a * b" << std::endl;
+    std::cout << "Enter a: \t";
+    while (!(std::cin >> a)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for a: ";
+    }
+    std::cout << "Enter b: \t";
+    while (!(std::cin >> b)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for b: ";
+    }
+    std::cout << std::endl << a << " * " << b << " = " << (a * b) << std::endl << std::endl;
+    return 1;
 }
 
-float division(float a, float b)
+bool division()
 {
-    return a / b;
+    double a,b;
+    std::cout << "Addition operation selected: a * b" << std::endl;
+    std::cout << "Enter a: \t";
+    while (!(std::cin >> a)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for a: ";
+    }
+    std::cout << "Enter b: \t";
+    while (!(std::cin >> b)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Enter a rational number for b: ";
+    }
+    std::cout << std::endl << a << " / " << b << " = " << (a / b) << std::endl << std::endl;
+    return 1;
 }
 
 int main() {
     int select;
     float a,b,result;
+    std::string c;
 
-    std::cout << "Operation List:" << std::endl;
-    std::cout << "1 - Addition \t2 - Subtraction \t3 - Multiplication" << std::endl;
-    std::cout << "4 - Division \t4 - Square Root \t5 - " << std::endl;
-    std::cout << "6 -  \t7 -  \t8 - " << std::endl;
-    std::cout << "Enter operation: \t";
-    std::cin >> select;
-    std::cout << "Enter first number: \t";
-    std::cin >> a;
-    std::cout << "Enter second number: \t";
-    std::cin >> b;
-    switch(select)
+    while(true)
     {
-        case 1:
-        result = addition(a,b);
-        break;
+        std::cout << "Operation List:" << std::endl;
+        std::cout << "1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division" << std::endl;
+        std::cout << "5 -  \t6 -  \t7 -  \t8 - " << std::endl << std::endl;
+        std::cout << "Enter operation: \t" ;
+
+        while (!(std::cin >> select) || select < 1 || select > 9) // Check if input fails
+        {
+            std::cin.clear();  // Clear error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore invalid input
+            std::cout << "Please enter a valid integer between 1 - 9: ";
+        }
+        
+        std::cout << std::endl;
+        switch(select)
+        {
+            case 1:
+            addition();
+            break;
+        }
+
+        std::cout << "Continue Calculating? (Y/N): " << std::endl;
+        while(true)
+        {
+            std::cin >> c;
+            if(c == "Y" || c == "y")
+            {
+                system("cls");
+                break;
+            }
+            else if(c == "N" || c == "n")
+            {
+                return 0;
+            }
+            else
+            {
+                std::cin.clear();  
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+                std::cout << "Please enter Y/N:" << std::endl;
+            }
+        } 
     }
-    std::cout << result << std::endl;
-    std::cin >> select;
     return 0;
 }
