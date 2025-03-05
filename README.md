@@ -1,7 +1,7 @@
 # BasicCalculator
 
-# This project is made with C++ language
-# The project is of a basic calculator, with the following operations:
+## This project is made with C++ language
+## The project is of a basic calculator, with the following operations:
 # 1. Addition           required
 # 2. Subtraction        required
 # 3. Multiplication     required
