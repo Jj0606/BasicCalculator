@@ -74,25 +74,58 @@ bool addition(long double a, long double b)
 
 bool subtraction(long double a, long double b)
 {
-    cout << endl << a << " - " << b << " = " << (a - b) << endl << endl;
+    cout << endl << defaultfloat << setprecision(10) << a << " - " << b << " = " << (a - b) << endl << endl;
     return 1;
 }
 
 bool multiplication(long double a, long double b)
 {
-    cout << endl << a << " * " << b << " = " << (a * b) << endl << endl;
+    cout << endl << defaultfloat << setprecision(10) << a << " * " << b << " = " << (a * b) << endl << endl;
     return 1;
 }
 
 bool division(long double a, long double b)
 {
-    cout << endl << a << " / " << b << " = " << (a / b) << endl << endl;
+    cout << endl << defaultfloat << setprecision(10) << a << " / " << b << " = " << (a / b) << endl << endl;
     return 1;
 }
 
 bool modulo(long int a, long int b)
 {
-    cout << endl << a << " % " << b << " = " << (a % b) << endl << endl;
+    cout << endl << defaultfloat << a << " % " << b << " = " << (a % b) << endl << endl;
+    return 1;
+}
+
+bool power(long double a, long int b)
+{
+    long double result; 
+    if(b == 0)
+    {
+        cout << endl  << a << "^" << b << " = 1"  << endl << endl;
+    }
+    else
+    {
+        result = a;
+        for(int i = 1; i < b; i++)
+        {
+            result *= a;
+        }
+        cout << endl << defaultfloat << a << "^" << b << " = " << result << endl << endl;
+    }
+    return 1;
+}
+
+bool squareroot(long double a)
+{
+    long double error = 0.00001; // Precision of result
+    long double result = a;
+
+    while ((result - a / result) > error) // Loop till precision is reached 
+    {
+        result = (result + a / result) / 2;
+    }
+
+    cout << endl << defaultfloat << setprecision(5) << "sqrt " << a  << " = " << result << endl << endl;
     return 1;
 }
 
@@ -110,7 +143,7 @@ int main() {
     while(true)
     {
         SetConsoleTextAttribute(hConsole, 14);
-        cout << "Operation List:\n1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division\n5 - Modulo \t6 -  \t7 -  \t8 - \n\n";
+        cout << "Operation List:\n1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division\n5 - Modulo \t6 - Power \t7 - Square Root \t8 - \n\n";
         SetConsoleTextAttribute(hConsole, 15);
         cout << "Enter operation: \t" ;
 
@@ -173,6 +206,19 @@ int main() {
             b = getValidNumber(true, false, true);
             SetConsoleTextAttribute(hConsole, 10);
             modulo(a,b);
+            break;
+            case 6:
+            cout << "Power operation selected: a^b\n";
+            a = getValidNumber();
+            b = getValidNumber(true, false);
+            SetConsoleTextAttribute(hConsole, 10);
+            power(a,b);
+            break;
+            case 7:
+            cout << "Square root operation selected: sqrt a\n";
+            a = getValidNumber(true, false);
+            SetConsoleTextAttribute(hConsole, 10);
+            squareroot(a);
             break;
         }
 
