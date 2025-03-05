@@ -66,44 +66,47 @@ long double getValidNumber(bool integerOnly = false, bool allowNegative = true, 
     }
 }
 
+// Function for addition
 bool addition(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " + " << b << " = " << (a + b) << endl << endl;
     return 1;
 }
 
+// Function for subtraction
 bool subtraction(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " - " << b << " = " << (a - b) << endl << endl;
     return 1;
 }
 
+// Function for multiplication
 bool multiplication(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " * " << b << " = " << (a * b) << endl << endl;
     return 1;
 }
 
+// Function for division
 bool division(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " / " << b << " = " << (a / b) << endl << endl;
     return 1;
 }
 
+// Function for modulus
 bool modulo(long int a, long int b)
 {
     cout << endl << defaultfloat << a << " % " << b << " = " << (a % b) << endl << endl;
     return 1;
 }
 
+// Function for positive integer power
 bool power(long double a, long int b)
 {
     long double result; 
-    if(b == 0)
-    {
-        cout << endl  << a << "^" << b << " = 1"  << endl << endl;
-    }
-    else
+
+    if(b != 0)
     {
         result = a;
         for(int i = 1; i < b; i++)
@@ -112,9 +115,14 @@ bool power(long double a, long int b)
         }
         cout << endl << defaultfloat << a << "^" << b << " = " << result << endl << endl;
     }
+    else
+    {
+        cout << endl  << a << "^" << b << " = 1"  << endl << endl;
+    }
     return 1;
 }
 
+// Function for square root
 bool squareroot(long double a)
 {
     long double error = 0.00001; // Precision of result
@@ -126,6 +134,25 @@ bool squareroot(long double a)
     }
 
     cout << endl << defaultfloat << setprecision(5) << "sqrt " << a  << " = " << result << endl << endl;
+    return 1;
+}
+
+// Function for factorial
+bool factorial(long int a)
+{
+    if(a != 0)
+    {
+        long int result = 1;
+        for(int i = a; i > 0; i--)
+        {
+            result *= i;
+        }
+        cout << endl << defaultfloat << a << "! = " << result << endl << endl;
+    }
+    else
+    {
+        cout << endl  << "0! = 1"  << endl << endl;
+    }
     return 1;
 }
 
@@ -143,7 +170,7 @@ int main() {
     while(true)
     {
         SetConsoleTextAttribute(hConsole, 14);
-        cout << "Operation List:\n1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division\n5 - Modulo \t6 - Power \t7 - Square Root \t8 - \n\n";
+        cout << "Operation List:\n1 - Addition \t2 - Subtraction \t3 - Multiplication \t4 - Division\n5 - Modulo \t6 - Power \t\t7 - Square Root \t8 - Factorial\n\n";
         SetConsoleTextAttribute(hConsole, 15);
         cout << "Enter operation: \t" ;
 
@@ -158,7 +185,7 @@ int main() {
             continue;
         }
 
-        // Check for numbers not in the range
+        // Check for numbers not in the range (0 - 8)
         if(operationChoice != static_cast<int>(operationChoice) || operationChoice <= 0 || operationChoice > 8)
         {
             SetConsoleTextAttribute(hConsole, 12);
@@ -219,6 +246,12 @@ int main() {
             a = getValidNumber(true, false);
             SetConsoleTextAttribute(hConsole, 10);
             squareroot(a);
+            break;
+            case 8:
+            cout << "Factorial operation selected: a!\n";
+            a = getValidNumber(true, false);
+            SetConsoleTextAttribute(hConsole, 10);
+            factorial(a);
             break;
         }
 
