@@ -67,42 +67,42 @@ long double getValidNumber(bool integerOnly = false, bool allowNegative = true, 
 }
 
 // Function for addition
-bool addition(long double a, long double b)
+void addition(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " + " << b << " = " << (a + b) << endl << endl;
-    return 1;
+    return void();
 }
 
 // Function for subtraction
-bool subtraction(long double a, long double b)
+void subtraction(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " - " << b << " = " << (a - b) << endl << endl;
-    return 1;
+    return void();
 }
 
 // Function for multiplication
-bool multiplication(long double a, long double b)
+void multiplication(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " * " << b << " = " << (a * b) << endl << endl;
-    return 1;
+    return void();
 }
 
 // Function for division
-bool division(long double a, long double b)
+void division(long double a, long double b)
 {
     cout << endl << defaultfloat << setprecision(10) << a << " / " << b << " = " << (a / b) << endl << endl;
-    return 1;
+    return void();
 }
 
 // Function for modulus
-bool modulo(long int a, long int b)
+void modulo(long int a, long int b)
 {
     cout << endl << defaultfloat << a << " % " << b << " = " << (a % b) << endl << endl;
-    return 1;
+    return void();
 }
 
 // Function for positive integer power
-bool power(long double a, long int b)
+void power(long double a, long int b)
 {
     long double result; 
 
@@ -119,11 +119,11 @@ bool power(long double a, long int b)
     {
         cout << endl  << a << "^" << b << " = 1"  << endl << endl;
     }
-    return 1;
+    return void();
 }
 
-// Function for square root
-bool squareroot(long double a)
+// Function for positive integer square root
+void squareroot(long int a)
 {
     long double error = 0.00001; // Precision of result
     long double result = a;
@@ -134,11 +134,11 @@ bool squareroot(long double a)
     }
 
     cout << endl << defaultfloat << setprecision(5) << "sqrt " << a  << " = " << result << endl << endl;
-    return 1;
+    return void();
 }
 
-// Function for factorial
-bool factorial(long int a)
+// Function for positive integer factorial
+void factorial(long int a)
 {
     if(a != 0)
     {
@@ -153,7 +153,7 @@ bool factorial(long int a)
     {
         cout << endl  << "0! = 1"  << endl << endl;
     }
-    return 1;
+    return void();
 }
 
 int main() {
@@ -206,6 +206,7 @@ int main() {
             SetConsoleTextAttribute(hConsole, 10);
             addition(a,b);
             break;
+
             case 2:
             cout << "Subtraction operation selected: a - b\n";
             a = getValidNumber();
@@ -213,6 +214,7 @@ int main() {
             SetConsoleTextAttribute(hConsole, 10);
             subtraction(a,b);
             break;
+
             case 3:
             cout << "Mulitpication operation selected: a * b\n";
             a = getValidNumber();
@@ -220,38 +222,43 @@ int main() {
             SetConsoleTextAttribute(hConsole, 10);
             multiplication(a,b);
             break;
+
             case 4:
             cout << "Division operation selected: a / b\n";
             a = getValidNumber();
-            b = getValidNumber(false, true, true);
+            b = getValidNumber(false, true, true);  // non zero number
             SetConsoleTextAttribute(hConsole, 10);
             division(a,b);
             break;
+
             case 5:
             cout << "Modulo operation selected: a % b\n";
-            a = getValidNumber(true);
-            b = getValidNumber(true, false, true);
+            d = static_cast<long int>(getValidNumber(true)); // integer
+            e = static_cast<long int>(getValidNumber(true, false, true)); // non zero positive integer
             SetConsoleTextAttribute(hConsole, 10);
-            modulo(a,b);
+            modulo(d,e);
             break;
+
             case 6:
             cout << "Power operation selected: a^b\n";
             a = getValidNumber();
-            b = getValidNumber(true, false);
+            d = static_cast<long int>(getValidNumber(true, false)); // postive integer
             SetConsoleTextAttribute(hConsole, 10);
-            power(a,b);
+            power(a,d);
             break;
+
             case 7:
             cout << "Square root operation selected: sqrt a\n";
-            a = getValidNumber(true, false);
+            d = static_cast<long int>(getValidNumber(true, false)); // postive integer
             SetConsoleTextAttribute(hConsole, 10);
-            squareroot(a);
+            squareroot(d);
             break;
+            
             case 8:
             cout << "Factorial operation selected: a!\n";
-            a = getValidNumber(true, false);
+            d = static_cast<long int>(getValidNumber(true, false)); // postive integer
             SetConsoleTextAttribute(hConsole, 10);
-            factorial(a);
+            factorial(d);
             break;
         }
 
