@@ -4,17 +4,18 @@
 #include <sstream>
 #include <limits>
 #include <ios>
+#include <iomanip>
 
 using namespace std;
 
 // Function to pre validate inputs
-double getValidNumber(bool integerOnly = false, bool allowNegative = true, bool disallowZero = false) 
+long double getValidNumber(bool integerOnly = false, bool allowNegative = true, bool disallowZero = false) 
 {
     HANDLE  hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     string input;
-    double number;
+    long double number;
     
     while (true) 
     {
@@ -54,7 +55,7 @@ double getValidNumber(bool integerOnly = false, bool allowNegative = true, bool 
         }
 
         // Check for integers
-        if(integerOnly && number != static_cast<int>(number)) 
+        if(integerOnly && number != static_cast<long int>(number)) 
         {
             SetConsoleTextAttribute(hConsole, 12);
             cout << "Error: You entered a decimal. Please enter a whole number.\n";
@@ -65,31 +66,33 @@ double getValidNumber(bool integerOnly = false, bool allowNegative = true, bool 
     }
 }
 
-bool addition(double a, double b)
+bool addition(long double a, long double b)
 {
-    cout << endl << a << " + " << b << " = " << (a + b) << endl << endl;
+    cout << endl << defaultfloat << setprecision(10) << a << " + " << b << " = " << (a + b) << endl << endl;
     return 1;
 }
 
-bool subtraction(double a, double b)
+bool subtraction(long double a, long double b)
 {
     cout << endl << a << " - " << b << " = " << (a - b) << endl << endl;
     return 1;
 }
 
-bool multiplication(double a, double b)
+bool multiplication(long double a, long double b)
 {
     cout << endl << a << " * " << b << " = " << (a * b) << endl << endl;
     return 1;
 }
 
-bool division(double a, double b)
+bool division(long double a, long double b)
 {
+    cout << endl << a << " / " << b << " = " << (a / b) << endl << endl;
     return 1;
 }
 
-bool modulo(int a, int b)
+bool modulo(long int a, long int b)
 {
+    cout << endl << a << " % " << b << " = " << (a % b) << endl << endl;
     return 1;
 }
 
@@ -101,8 +104,8 @@ int main() {
     double operationChoice;
     int select;
     
-    double a,b;
-    int d,e;
+    long double a,b;
+    long int d,e;
 
     while(true)
     {
@@ -130,30 +133,46 @@ int main() {
             continue;
         }
 
-        select = static_cast<int>(operationChoice);
+        select = static_cast<long int>(operationChoice);
         
         cout << endl;
+        SetConsoleTextAttribute(hConsole, 14);
         switch(select)
         {
             case 1:
-            SetConsoleTextAttribute(hConsole, 14);
-            cout << "Addition operation selected: a + b" << endl;
+            cout << "Addition operation selected: a + b\n";
             a = getValidNumber();
             b = getValidNumber();
             SetConsoleTextAttribute(hConsole, 10);
             addition(a,b);
             break;
             case 2:
-            cout << "Subtraction operation selected: a - b" << endl;
+            cout << "Subtraction operation selected: a - b\n";
+            a = getValidNumber();
+            b = getValidNumber();
+            SetConsoleTextAttribute(hConsole, 10);
+            subtraction(a,b);
             break;
             case 3:
-            cout << "Mulitpication operation selected: a * b" << endl;
+            cout << "Mulitpication operation selected: a * b\n";
+            a = getValidNumber();
+            b = getValidNumber();
+            SetConsoleTextAttribute(hConsole, 10);
+            multiplication(a,b);
             break;
             case 4:
-            cout << "Division operation selected: a / b" << endl;
+            cout << "Division operation selected: a / b\n";
+            a = getValidNumber();
+            b = getValidNumber(false, true, true);
+            SetConsoleTextAttribute(hConsole, 10);
+            division(a,b);
             break;
             case 5:
-            cout << "Modulo operation selected: a % b" << endl;
+            cout << "Modulo operation selected: a % b\n";
+            a = getValidNumber(true);
+            b = getValidNumber(true, false, true);
+            SetConsoleTextAttribute(hConsole, 10);
+            modulo(a,b);
             break;
         }
 
